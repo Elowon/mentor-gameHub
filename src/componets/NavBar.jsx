@@ -63,16 +63,21 @@ const NavBar = () => {
       {showMusicPrompt && (
         <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-md shadow-lg text-center">
-            <p className="mb-4 text-lg">Would you like to play background music?</p>
+            <p className="mb-4 text-lg">
+              Would you like to play background music?
+            </p>
             <div className="flex justify-center gap-4">
               <button
                 onClick={() => {
                   if (audioElementRef.current) {
-                    audioElementRef.current.play().then(() => {
-                      setIsAudioPlaying(true);
-                      setIsIndicatorActive(true);
-                      setShowMusicPrompt(false);
-                    }).catch((err) => console.error("Playback error:", err));
+                    audioElementRef.current
+                      .play()
+                      .then(() => {
+                        setIsAudioPlaying(true);
+                        setIsIndicatorActive(true);
+                        setShowMusicPrompt(false);
+                      })
+                      .catch((err) => console.error("Playback error:", err));
                   }
                 }}
                 className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
@@ -104,6 +109,7 @@ const NavBar = () => {
                 alt="logo"
                 className="w-10"
               />
+
               <Button
                 id="product-button"
                 title="Products"
@@ -114,21 +120,9 @@ const NavBar = () => {
 
             {/* Nav links and audio button */}
             <div className="flex h-full items-center">
-              <div className="md:block">
-                {navItems.map((item, index) => (
-                  <a
-                    key={index}
-                    href={`#${item.toLowerCase()}`}
-                    className="nav-hover-btn"
-                  >
-                    {item}
-                  </a>
-                ))}
-              </div>
-
               <button
                 onClick={toggleAudioIndicator}
-                className="ml-10 flex items-center space-x-0.5"
+                className="mr-10 flex items-center space-x-0.5"
               >
                 <audio
                   ref={audioElementRef}
@@ -137,6 +131,7 @@ const NavBar = () => {
                   loop
                   preload="auto"
                 />
+
                 {[1, 2, 3, 4].map((bar) => (
                   <div
                     key={bar}
@@ -149,6 +144,18 @@ const NavBar = () => {
                   />
                 ))}
               </button>
+
+              <div className="md:block">
+                {navItems.map((item, index) => (
+                  <a
+                    key={index}
+                    href={`#${item.toLowerCase()}`}
+                    className="nav-hover-btn"
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
             </div>
           </nav>
         </header>
